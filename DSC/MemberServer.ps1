@@ -2,14 +2,21 @@
 {
     #Import Modules!
     Import-DscResource -Module xPSDesiredStateConfiguration
+    Import-DscResource -Module PSDesiredStateConfiguration
+    Import-DscResource -Module cWindowscomputer
+    Import-DscResource -Module cAzureAutomation
     Import-DscResource -Module xPendingReboot
     Import-DscResource -Module xDSCDomainjoin -ModuleVersion 1.1
     Import-DscResource -Module xWebAdministration
+    Import-DscResource -Module cNetworkAdapter
+    Import-DscResource -Module cDisk
+    Import-DscResource -Module xDisk
     Import-DscResource -Module xWindowsUpdate
-    Import-DscResource -Module xStorage
-    Import-DscResource -Module xNetworking
-    Import-DscResource -Module xActiveDirectory
-    Import-DscResource -Module xComputerManagement
+#    Import-DscResource -Module xStorage
+#    Import-DscResource -Module xNetworking
+#    Import-DscResource -Module xActiveDirectory
+#    Import-DscResource -Module xComputerManagement
+
 
     $SourceDir = 'D:\Source'
 

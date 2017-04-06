@@ -36,9 +36,20 @@
         "OPINSIGHTS_WORKSPACE_ID=$($GlobalVars.WorkspaceID) " +
         "OPINSIGHTS_WORKSPACE_KEY=$($WorkspaceKey)`""
 
+    $ADMVersion = '9.0.3'
+    $ADMRemotSetupExeURI = 'https://go.microsoft.com/fwlink/?LinkId=698625'
+    $ADMSetupExe = 'ADM-Agent-Windows.exe'
+    $ADMCommandLineArguments = '/S'
 
- Node MemberServerDev
+
+ Node MemberServer1.0
     {
+        File SourceFolder
+        {
+            DestinationPath = $($SourceDir)
+            Type = 'Directory'
+            Ensure = 'Present'
+        }
             xRemoteFile DownloadMicrosoftManagementAgent
         {
             Uri = $MMARemotSetupExeURI
@@ -56,6 +67,44 @@
              InstalledCheckRegValueData = 'Microsoft Monitoring Agent'
              ProductID = ''
              DependsOn = "[xRemoteFile]DownloadMicrosoftManagementAgent"
+        }
+        xPendingReboot Reboot1
+        { 
+            Name = "RebootServer"
+            DependsOn = "[xPackage]InstallMicrosoftManagementAgent"
+        }
+        xRemoteFile DownloadAppDependencyMonitor
+        {
+            Uri = $ADMRemotSetupExeURI
+            DestinationPath = "$($SourceDir)\$($ADMSetupExe)"
+            MatchSource = $False
+        }
+        xPackage InstallAppDependencyMonitor
+        {
+             Name = "Application Dependency Monitor"
+             Path = "$($SourceDir)\$($ADMSetupExE)" 
+             Arguments = $ADMCommandLineArguments 
+             Ensure = 'Present'
+             InstalledCheckRegKey = 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\DependencyAgent'
+             InstalledCheckRegValueName = 'DisplayVersion'
+             InstalledCheckRegValueData = $ADMVersion
+             ProductID = ''
+             DependsOn = "[xRemoteFile]DownloadMicrosoftManagementAgent"
+        }
+        xPendingReboot Reboot2
+        { 
+            Name = "RebootServer2"
+            DependsOn = "[xPackage]InstallAppDependencyMonitor"
+        }
+        xDSCDomainjoin JoinDomain
+        {
+            Domain = $GlobalVars.DomainName
+            Credential = $DomainJoinCredential
+        }
+        cAzureNetworkPerformanceMonitoring EnableAzureNPM
+        {
+            Name = 'EnableNPM'
+            Ensure = 'Present'
         }
     }
 }

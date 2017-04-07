@@ -7,7 +7,7 @@ $WorkspaceID = Get-AutomationVariable -Name "_Global-WorkspaceID"
 $WorkspaceCredential = Get-AutomationPSCredential -Name $WorkspaceID
 $WorkspaceKey = $WorkspaceCredential.GetNetworkCredential().Password
 
-Node "MonitoringAgent1.0" {
+Node "MonitoringAgent2.0" {
 xRemoteFile OIPackage {
     Uri = "http://download.microsoft.com/download/3/1/7/317DCEEb-5E48-47B0-A849-D8A2B1D7795C/MMASetup-AMD64.exe"
     DestinationPath = $OIPackageLocalPath
@@ -19,7 +19,7 @@ Service OIService {
     DependsOn = "[Package]OI"
     }
 
-PackageOI {
+Package OI {
     Ensure= "Present"
     Path = $OIPackageLocalPath
     Name = "Microsoft Monitoring Agent"

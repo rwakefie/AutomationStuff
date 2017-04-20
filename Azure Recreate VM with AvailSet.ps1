@@ -17,6 +17,9 @@ $Location = $VM.Location
 
     $AvailSet = New-AzureRmAvailabilitySet -Name $AvailSetName -ResourceGroupName $ResourceGroup -Location $Location
 
+# Check for Managed Disk
+   if ($VM.StorageProfile.OsDisk.ManagedDisk -ne $null) {Update-AzureRmAvailabilitySet -AvailabilitySet $AvailSet -Managed}
+
 # Stop and Deprovision existing Azure VM, retaining Disks
 
     $VM | Stop-AzureRmVm -Force

@@ -13,9 +13,10 @@ Param(
 Import-Module SCOrchDev-Utility -Verbose:$False
 Import-Module SCOrchDev-Exception -Verbose:$False
 Import-Module SCOrchDev-File -Verbose:$False
-Import-Module SCOrchDev-GitIntegration -Verbose:$False
+#Import-Module SCOrchDev-GitIntegration -Verbose:$False
 Import-Module AzureRM.Profile -Verbose:$False
 Import-Module AzureRM.RecoveryServices -Verbose:$False
+Import-Module AzureRM.RecoveryServices.Backup -Verbose:$False
 
 $ErrorActionPreference = [System.Management.Automation.ActionPreference]::Stop
 $CompletedParameters = Write-StartingMessage -CommandName Find-NonBackupComputer.ps1
@@ -23,6 +24,7 @@ $CompletedParameters = Write-StartingMessage -CommandName Find-NonBackupComputer
 $SubscriptionName = Get-AutomationVariable -Name "SubscriptionName"
 $ResourceGroupName = Get-AutomationVariable -Name "ResourceGroupName"
 $SubscriptionTenant = Get-AutomationVariable -Name "SubscriptionTenant"
+$SubscriptionID = Get-AutomationVariable -Name "SubscriptionID"
 
 Try
 {
@@ -36,6 +38,8 @@ $connectionName = "AzureRunAsConnection"
         -TenantId $servicePrincipalConnection.TenantId `
         -ApplicationId $servicePrincipalConnection.ApplicationId `
         -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint 
+   "Setting context to a specific subscription"     
+   Set-AzureRmContext -SubscriptionId $SubscriptionId  
 
     $ProtectedVM = @()
     $Vault = Get-AzureRmRecoveryServicesVault

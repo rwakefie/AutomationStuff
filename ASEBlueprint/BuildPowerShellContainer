@@ -1,0 +1,22 @@
+#Starting from Window Server Core IMage
+FROM microsoft/windowsservercore
+
+#Set ExecutionPolicy
+RUN PowerShell Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+
+
+#Installing Providers
+RUN PowerShell Install-PackageProvider NuGet -Force
+RUN PowerShell Import-PackageProvider NuGet -Force
+RUN PowerShell Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+RUN PowerShell Install-PackageProvider -Name chocolatey -Force
+
+#Installing Modules
+RUN PowerShell Install-Module AzureRM -Force
+RUN PowerShell Install-Module -Name AzureAD -Force
+
+#Install Chocolatey
+RUN @powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:ChocolateyUseWindowsCompression='false'; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+#Use Chocolatey to install Git
+RUN Choco Install Git -fy

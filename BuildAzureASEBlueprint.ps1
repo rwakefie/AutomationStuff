@@ -1,8 +1,10 @@
 ﻿#Location of Docker Files
-$Location = "C:\Git\AutomationStuff\AutomationStuff"
+$Location = "C:\Git\AutomationStuff\AutomationStuff\ASEBlueprint"
 
 #Name of Dockerfile
-$Dockerfile = "MyPowerShellContainerBuildDockerfile"
+$DockerfileBuild = "BuildPowerShellContainer"
+$DockerfileRun = "RunPowerShellCode"
+
 
 #Download ARM Template files from Git
 $WebClient = New-Object -TypeName System.Net.WebClient
@@ -38,8 +40,9 @@ docker build -t rwakefie/mypowershellcontainer -f $dockerfile .
 
 #testing
 docker build -t rwakefie/mypowershellcontainer -f BuildPowerShellContainer .
+docker build -t rwakefie/mypowershellcontainer -f RunPowerShellCode .
 
-docker build -t rwakefie/aseblueprintexecute -f RunPowerShellCode .
+
 
 
 

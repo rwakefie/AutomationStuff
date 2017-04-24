@@ -1,11 +1,7 @@
-﻿$webhookurl = 'https://s2events.azure-automation.net/webhooks?token=[secrettoken]'
-
-$body = @{"LastName" = "Stranger"; "FirstName" = "Stefan"}
+﻿$webhookurl = 'https://s1events.azure-automation.net/webhooks?token=5grRyU9%2b6%2bkOnQRZpnfHDwn5UmxSwt%2bMzVrL9rmJbdI%3d'
 
 $params = @{
     ContentType = 'application/json'
-    Headers = @{'from' = 'Stefan Stranger'; 'Date' = "$(Get-Date)"}
-    Body = ($body | convertto-json)
     Method = 'Post'
     URI = $webhookurl
 }

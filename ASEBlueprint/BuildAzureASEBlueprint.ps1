@@ -37,7 +37,7 @@ docker build -t rwakefie/mypowershellcontainer -f $dockerfile .
 
 
 #testing
-docker build -t rwakefie/mypowershellcontainer -f RunPowerShellCode .
+docker build -t rwakefie/runpowershellcode -f RunPowerShellCode .
 
 docker build -t rwakefie/mypowershellcontainer -f BuildPowerShellContainer .
 

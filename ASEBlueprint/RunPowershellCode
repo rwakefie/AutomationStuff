@@ -1,6 +1,4 @@
-FROM microsoft/windowsservercore
+FROM rwakefie/mypowershellcontainer
 RUN PowerShell Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
-RUN @powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:ChocolateyUseWindowsCompression='false'; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-RUN Choco Install Git -y
 CMD MKDIR C:\Execute
-RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\execute
+RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\executedock

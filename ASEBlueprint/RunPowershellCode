@@ -1,4 +1,5 @@
 FROM rwakefie/mypowershellcontainer
 RUN PowerShell Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
-CMD MKDIR C:\Execute
-RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\execute
+CMD MKDIR C:\Temp
+RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\Temp
+COPY azureprofile.json C:\Temp\

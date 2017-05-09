@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Starting from custom image with prerequisites installed
 FROM rwakefie/mypowershellcontainer
 
@@ -7,3 +8,10 @@ CMD MKDIR C:\Execute
 
 #Pull git repo
 RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\execute
+=======
+FROM rwakefie/mypowershellcontainer
+RUN PowerShell Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+CMD MKDIR C:\Temp
+RUN git clone https://github.com/mayurshintre/Blueprints-PaaS-ASE c:\Temp
+COPY azureprofile.json C:\Temp\
+>>>>>>> 4a5b7fb61e5833ebf86638d7d3014c6ffd58a060

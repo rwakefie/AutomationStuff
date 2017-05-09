@@ -20,3 +20,7 @@ RUN @powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:ChocolateyUseW
 
 #Use Chocolatey to install Git
 RUN Choco Install Git -fy
+
+COPY ASEB.pfx C:\Temp\
+COPY "Encrypt Passwords.ps1" C:\Temp\
+COPY "Import PFX Certificate.ps1" C:\Temp\

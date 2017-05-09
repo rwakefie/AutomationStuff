@@ -37,6 +37,11 @@ docker build -t rwakefie/mypowershellcontainer -f $dockerfile .
 
 
 #testing
+<<<<<<< HEAD
+=======
+docker build -t rwakefie/runpowershellcode -f RunPowerShellCode .
+
+>>>>>>> 4a5b7fb61e5833ebf86638d7d3014c6ffd58a060
 docker build -t rwakefie/mypowershellcontainer -f BuildPowerShellContainer .
 
 docker build -t rwakefie/aseblueprintexecute -f RunPowerShellCode .

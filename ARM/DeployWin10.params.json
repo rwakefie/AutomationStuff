@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+        "adminUsername": {
+            "value": "rwakefie-adm"
+        },
+        "vmName": {
+            "value": "Win10ARM"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/6462f71c-9cb5-4f4c-bc31-22dc79fbb342/resourceGroups/RWEUS2/providers/Microsoft.KeyVault/vaults/RWKetVault"
+                },
+                "secretName": "serverAdminPassword"
+            }
+        }
+    }
+}

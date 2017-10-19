@@ -1,7 +1,7 @@
-﻿$vmName = "Win7x86test"
-$rgName = "TR"
+﻿$vmName = "Win7nosysprep"
+$rgName = "RWEUS2"
 $location = "EastUS2"
-$imageName = "Win7x86Generalized"
+$imageName = "Win7x86nounattend"
 
 Stop-AzureRmVM -ResourceGroupName $rgName -Name $vmName -Force
 

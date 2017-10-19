@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "osDiskVhdUri": {
-            "value": "https://imagerepositorydemo.blob.core.windows.net/images/Win 7 x86 Base.vhd"
+            "value": "https://imagerepositorydemo.blob.core.windows.net/images/Win 7 x86 non sysprep.vhd"
         },
         "osType": {
             "value": "Windows"
@@ -12,7 +12,7 @@
             "value": "Standard_A1_v2"
         },
         "vmName": {
-            "value": "Win7SpecARM"
+            "value": "Win7nosysprep"
         }
     }
 }

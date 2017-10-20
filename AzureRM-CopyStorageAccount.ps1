@@ -9,4 +9,7 @@ $DestinationContext = New-AzureStorageContext -StorageAccountName $DestStorageAc
 
 $Blob = Get-AzureStorageBlob -Context $sourceContext -Container $ContainerName
 
-$Blob | Start-AzureStorageBlobCopy -Context $sourceContext -DestContext $destinationContext -DestContainer $ContainerName -Force
+$DestContainer = "backups-" + (Get-Date -Format o).Replace(":","-").Replace(".","-").ToLower()
+New-AzureStorageContainer -Name $DestContainer -Context $DestinationContext
+
+$Blob | Start-AzureStorageBlobCopy -Context $sourceContext -DestContext $destinationContext -DestContainer $DestContainer -Force

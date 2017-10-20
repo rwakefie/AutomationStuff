@@ -1,0 +1,29 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "localAdminUsername": {
+            "value": "rwakefield1"
+        },
+        "osType": {
+            "value": "Windows"
+        },
+        "vmSize": {
+            "value": "Standard_A1_v2"
+        },
+        "vmName": {
+            "value": "win7delete4"
+        },
+        "imageName": {
+            "value": "Win7x86nounattend"
+        },
+        "localAdminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/6462f71c-9cb5-4f4c-bc31-22dc79fbb342/resourceGroups/RWEUS2/providers/Microsoft.KeyVault/vaults/RWKetVault"
+                },
+                "secretName": "localAdminPassword"
+            }
+        }
+    }
+}

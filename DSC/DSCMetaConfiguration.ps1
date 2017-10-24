@@ -92,8 +92,8 @@ Configuration DscMetaConfigs
 $Params = @{
     RegistrationUrl = 'https://eus2-agentservice-prod-1.azure-automation.net/accounts/193d807a-a0dc-4942-899c-1c2177db85c8';
     RegistrationKey = 'VHFRTac7c/GOOzn8WBNXgRYY0iWgg5fQXukXO4Y1q5ovv8keHmYCcbScj0nCxJYk1BiSXatOW0pNMOUPZyrTKw==';
-    ComputerName = @('RWASR2', 'RWASRGW2');
-    NodeConfigurationName = 'AdministratorAccount.localhost';
+    ComputerName = @('win7delete6', 'win7delete5');
+    NodeConfigurationName = 'desktopconfig.desktopconfig';
     RefreshFrequencyMins = 30;
     ConfigurationModeFrequencyMins = 15;
     RebootNodeIfNeeded = $False;

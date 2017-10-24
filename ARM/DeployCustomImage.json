@@ -19,13 +19,13 @@
         }
     },
     "variables": {
-        "vnetId": "[resourceId('ScorchDev','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "virtualNetworkName": "RWVnetEUS2",
+        "vnetId": "[resourceId('ScorchDev','Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "networkInterfaceName": "[concat(parameters('virtualMachineName'),'-nic')]",
         "subnetName": "RWBE",
         "diagnosticsStorageAccountName": "rwdiagnostics",
         "diagnosticsStorageAccountId": "/subscriptions/6462f71c-9cb5-4f4c-bc31-22dc79fbb342/resourceGroups/rweus2/providers/Microsoft.Storage/storageAccounts/rwdiagnostics",
-        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
     },
     "resources": [
         {
@@ -34,7 +34,7 @@
             "apiVersion": "2016-04-30-preview",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
             ],
             "properties": {
                 "osProfile": {
@@ -42,7 +42,7 @@
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
-                        "provisionVmAgent": "false"
+                        "provisionVmAgent": false
                     }
                 },
                 "hardwareProfile": {
@@ -96,9 +96,9 @@
         }
     ],
     "outputs": {
-        "adminUsername": {
+        "virtualMachineName": {
             "type": "string",
-            "value": "[parameters('adminUsername')]"
+            "value": "[parameters('virtualMachineName')]"
         }
     }
 }

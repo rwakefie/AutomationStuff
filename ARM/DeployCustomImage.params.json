@@ -6,7 +6,7 @@
             "value": "eastus2"
         },
         "virtualMachineName": {
-            "value": "win7delete6"
+            "value": "win7testupdate"
         },
         "virtualMachineSize": {
             "value": "Standard_A1"

@@ -1,8 +1,12 @@
-﻿Param ([Parameter(Mandatory=$true)][String]$vmName,[Parameter(Mandatory=$true)][String]$DestinationResourseGroup )
+﻿#Param ([Parameter(Mandatory=$true)][String]$vmName,[Parameter(Mandatory=$true)][String]$DestinationResourseGroup )
 
 
-$VnetRG = Get-AutomationVariable -Name "VnetRG"
-$virtualNetworkName = Get-AutomationVariable -Name "RWVnetEUS2"
+##Varibales 
+$vmName = ""
+$DestinationResourseGroup = "RWEUS2"
+$subnetName = "RWBE"
+$VnetRG = "ScorchDev"
+$virtualNetworkName = "RWVnetEUS2"
 $location = "EastUS2"
 $virtualMachineSize = 'Standard_A1_v2'
 
@@ -16,8 +20,9 @@ $osDisk = New-AzureRmDisk -DiskName $osDiskName -Disk `
 
 #Virtual Networking
 $virtualNetwork = Get-AzureRmVirtualNetwork -ResourceGroupName $VnetRG -Name $virtualNetworkName
-$nic = New-AzureRmNetworkInterface -ResourceGroupName $DestinationResourseGroup -Name $vmName -Location $location -SubnetId $virtualNetwork.Subnets[0].Id
-$vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $VnetRG -Name $virtualNetworkName
+$subnetID = $virtualNetwork.Subnets | Where {$_.Name -eq "$subnetName"}
+$nic = New-AzureRmNetworkInterface -ResourceGroupName $DestinationResourseGroup -Name $vmName -Location $location -SubnetId $subnetID.ID
+$vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $DestinationResourseGroup -Name $virtualNetworkName
 
 #Build VM Config
 $VirtualMachine = New-AzureRmVMConfig -VMName $vmName -VMSize $virtualMachineSize
